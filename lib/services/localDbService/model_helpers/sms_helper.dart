@@ -16,7 +16,7 @@ class SmsHelper {
       DatabaseHelper.columnMessage: sms.message,
       DatabaseHelper.columnFeedback: sms.feedback,
       DatabaseHelper.columnTime: sms.time,
-      DatabaseHelper.columnIsCurrent: sms.isCurrent,
+      DatabaseHelper.columnCurrent: sms.current,
     };
     await dbHelper.insert(row);
   }
@@ -29,7 +29,7 @@ class SmsHelper {
       DatabaseHelper.columnMessage: sms.message,
       DatabaseHelper.columnFeedback: sms.feedback,
       DatabaseHelper.columnTime: sms.time,
-      DatabaseHelper.columnIsCurrent: sms.isCurrent,
+      DatabaseHelper.columnCurrent: sms.current,
     };
     await dbHelper.update(row,);
   }
@@ -63,7 +63,7 @@ class SmsHelper {
         message: map[i]['message'],
         feedback: map[i]['feedback'],
         time: map[i]['time'],
-          isCurrent: map[i]['is_current']
+          current: map[i]['current']
       ));
     }
     return supplierList;

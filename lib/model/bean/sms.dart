@@ -4,7 +4,7 @@ class Sms {
   String message;
   String feedback = '';
   String time='';
-  int isCurrent;
+  int current;
 
   Sms({
     this.id,
@@ -12,12 +12,12 @@ class Sms {
     this.message,
     this.feedback,
     this.time,
-    this.isCurrent,
+    this.current,
   });
 
   @override
   String toString() {
-    return 'Sms{id: $id, number: $number, message: $message, feedback: $feedback, time: $time, isCurrent: $isCurrent}';
+    return 'Sms{id: $id, number: $number, message: $message, feedback: $feedback, time: $time, isCurrent: $current}';
   }
 
   Sms.fromMap(Map<String, dynamic> res)
@@ -26,7 +26,7 @@ class Sms {
         message = res["message"],
         feedback = res["feedback"],
         time = res["time"],
-        isCurrent = res["isCurrent"];
+        current = res["current"];
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
@@ -35,7 +35,7 @@ class Sms {
     map['message'] = message;
     map['feedback'] = feedback;
     map['time'] = time;
-    map['isCurrent'] = isCurrent;
+    map['current'] = current;
     return map;
   }
 }

@@ -1,20 +1,14 @@
+import 'package:depo_sms/model/sms_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
+TextEditingController controller = TextEditingController();
 class SecondsField extends StatelessWidget {
-  final Color iconColor;
-  final void Function() onPressed;
-  final TextEditingController controller;
-
-  const SecondsField({
-    Key key,
-    this.iconColor = Colors.black,
-    this.onPressed,
-    this.controller,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var smsProvider = context.read<SmsModel>();
     return Container(
         margin: const EdgeInsets.symmetric(
             horizontal: 15.0, vertical: 5.0), //line and text
@@ -51,6 +45,9 @@ class SecondsField extends StatelessWidget {
                           disabledBorder: InputBorder.none,
                           contentPadding: EdgeInsets.zero,
                           hintText: "másodpercek"),
+                      onChanged: (string){
+                        smsProvider.sendingDelay = int.parse(string);
+                      },
                     )
                   ],
                 ),

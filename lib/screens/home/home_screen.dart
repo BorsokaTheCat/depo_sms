@@ -2,6 +2,7 @@
 import 'package:depo_sms/model/sms_model.dart';
 import 'package:depo_sms/screens/components/rounded_button.dart';
 import 'package:depo_sms/screens/home/components/home_appbar.dart';
+import 'package:depo_sms/screens/storage/storage_screen.dart';
 import 'package:depo_sms/services/file_reading_service.dart';
 import 'package:depo_sms/services/permission_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,6 +16,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_document_picker/flutter_document_picker.dart';
 import 'dart:async';
 import 'dart:io';
+
+import 'components/send_button.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -46,11 +49,9 @@ class _FavouritesScreenState extends State<HomeScreen> {
     text: 'application/pdf image/png',
   );
 
-  String _status = ' ';
   bool _iosPublicDataUTI = true;
   bool _checkByCustomExtension = false;
   bool _checkByMimeType = false;
-  bool _isButtonDisabled = false;
   bool _isInTheRightFormat = false;
 
   _pickDocument() async {
@@ -110,21 +111,34 @@ class _FavouritesScreenState extends State<HomeScreen> {
     if(_pickFileInProgress){
       print('pick file in progress');
     }else{
-      await PermissionsService().requestStoragePermission()
-          ?_pickDocument
-          : print('Permission has been denied');
+      bool  permission=await PermissionsService().requestStoragePermission();
+      if(permission){
+        _pickDocument();
+        print('Permission has been granded');
+      }else{
+
+        print('Permission has been denied');
+      }
     }
   }
+
+
 
 
   final secoundsController = TextEditingController(/*text: "5"*/);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var smsProvider = context.read<SmsModel>();
     return Scaffold(
       appBar: HomeAppbar(
         openPressed: askStoragePermission,//todo
-        savePressed: null, //todo
+        savePressed: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => StorageScreen()),
+          );
+        }, //todo
       ),
       // This is handled by the search bar itself.
       //resizeToAvoidBottomInset: false,
@@ -140,44 +154,17 @@ class _FavouritesScreenState extends State<HomeScreen> {
                 title: '$_path',
               ),
               SecondsField(
-                controller: secoundsController,
               ),
               SizedBox(
                 height: 50.0,
               ),
               RoundedButton(
                 text: "db",
-                color: _isButtonDisabled ? grey : purple,
+                color: smsProvider.sendingInProgress ? grey : purple,
                 press: null, //todo
               ),
-              /*Align(
-                alignment: Alignment.center,
-                child: FlatButton(
-                  color: _isButtonDisabled ? Colors.grey : Color(0xff3f1272),
-                  onPressed: () {
-                    //smsList.clear();
-                    for (int i = 0; i < currentSmsList.length; i++) {
-                      print(currentSmsList[i].toString());
-                    }
-                  },
-                  child: const Text('current!',
-                      style: TextStyle(fontSize: 20, color: Colors.white)),
-                  //elevation: 5,
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: FlatButton(
-                  color: _isButtonDisabled ? Colors.grey : Color(0xff3f1272),
-                  onPressed: () {
-                    _canWeSendSmses();
-                  },
-                  child: const Text('Küldés!',
-                      style: TextStyle(fontSize: 20, color: Colors.white)),
-                  //elevation: 5,
-                ),
-              ),
-              Center(child: Text('$_status')),*/
+              SendButton(),
+              Center(child: Text(smsProvider.sendingInProgress ?"Sending in progress":"KÉsz a kiküldés")),
             ],
           ),
         ),

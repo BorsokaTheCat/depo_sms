@@ -7,6 +7,9 @@ class SmsModel with ChangeNotifier {
   List<Sms> smsList = [];
   List<Sms> currentSmsList = [];
 
+  bool sendingInProgress=false;
+  int sendingDelay=0;
+
   SmsHelper _smsHelper = new SmsHelper();
 
   Future<int> updateSmsList() async {

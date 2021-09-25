@@ -8,14 +8,14 @@ class DatabaseHelper {
   static final _databaseName = "MyDatabase2.db";
   static final _databaseVersion = 1;
 
-  static final table = 'sms2';
+  static final table = 'sms';
 
-  static final columnId = '_id';
+  static final columnId = 'id';
   static final columnNumber = 'number';
   static final columnMessage = 'message';
   static final columnFeedback = 'feedback';
   static final columnTime= 'time';
-  static final columnIsCurrent= 'is_current';
+  static final columnCurrent= 'current';
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -48,8 +48,8 @@ class DatabaseHelper {
             $columnNumber TEXT NOT NULL,
             $columnMessage TEXT NOT NULL,
             $columnTime TEXT, 
-            $columnFeedback TEXT
-            $columnIsCurrent INTEGER
+            $columnFeedback TEXT,
+            $columnCurrent INTEGER
           )
           ''');
   /*  await db.execute('''
