@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
             bodyText2: TextStyle(fontSize: 12.0,color: black,),),
         ),*/
         home: HomeScreen(),
-     /* ),*/);
+     /* ),*/));
   }
 
 }

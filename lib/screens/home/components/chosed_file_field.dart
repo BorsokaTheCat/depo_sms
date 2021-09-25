@@ -44,7 +44,7 @@ class ChosedFileField extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text(title, style: textTheme.subhead),
+                    Text(title),
                   ],
                 ),
               ),

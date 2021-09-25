@@ -5,33 +5,35 @@ import 'bean/sms.dart';
 
 class SmsModel with ChangeNotifier {
   List<Sms> smsList = [];
+  List<Sms> currentSmsList = [];
 
   SmsHelper _smsHelper = new SmsHelper();
 
-  Future<int> updateBluegoServicesList() async {
+  Future<int> updateSmsList() async {
     smsList.clear();
+    currentSmsList.clear();
     smsList= await _smsHelper.makeSmsList();
+    currentSmsList= await _smsHelper.makeCurrentSmsList();
     notifyListeners();
     return smsList.length;
   }
 
-  Future<void> insertBlugoService(Sms sms) async {
+  Future<void> insertSms(Sms sms) async {
     _smsHelper.insertSms(sms);
-    await updateBluegoServicesList(); // if we insert somebody(somebody register) he will be our current user;
-    notifyListeners();
+    await updateSmsList();
   }
 
-  void deleteBlugoService(Sms sms) {
+  Future<void> deleteSms(Sms sms) async {
     _smsHelper.deleteSms(sms);
-    notifyListeners();
+    await updateSmsList();
   }
 
-  Future<void> updateBlugoService(Sms sms) async {
+  Future<void> updateSms(Sms sms) async {
     _smsHelper.updateSms(sms);
-    //updateVehiclesList();
+    await updateSmsList();
   }
 
-  void printBlugoServices() {
+  void printSms() {
     print("print BlugoServices from db:");
     _smsHelper.querySms();
   }

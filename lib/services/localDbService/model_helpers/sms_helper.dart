@@ -1,10 +1,12 @@
 
 import 'package:depo_sms/model/bean/sms.dart';
 
+import '../db_query_helper.dart';
 import '../local_db_service.dart';
 
 class SmsHelper {
   final dbHelper = DatabaseHelper.instance;
+  final queryHelper = QueryHelper.instance;
 
   ///insert the received supplier to the local db
   Future<void> insertSms(Sms sms) async {
@@ -14,6 +16,7 @@ class SmsHelper {
       DatabaseHelper.columnMessage: sms.message,
       DatabaseHelper.columnFeedback: sms.feedback,
       DatabaseHelper.columnTime: sms.time,
+      DatabaseHelper.columnIsCurrent: sms.isCurrent,
     };
     await dbHelper.insert(row);
   }
@@ -26,6 +29,7 @@ class SmsHelper {
       DatabaseHelper.columnMessage: sms.message,
       DatabaseHelper.columnFeedback: sms.feedback,
       DatabaseHelper.columnTime: sms.time,
+      DatabaseHelper.columnIsCurrent: sms.isCurrent,
     };
     await dbHelper.update(row,);
   }
@@ -58,9 +62,17 @@ class SmsHelper {
         number: map[i]['number'],
         message: map[i]['message'],
         feedback: map[i]['feedback'],
-        time: map[i]['time']
+        time: map[i]['time'],
+          isCurrent: map[i]['is_current']
       ));
     }
     return supplierList;
+  }
+
+  Future<List<Sms>> makeCurrentSmsList() async {
+    var allFavourite = await dbHelper
+        .queryRows(queryHelper.createCurrentSmsesQueryString());
+
+    return makeListFromMap(allFavourite);
   }
 }

@@ -15,6 +15,7 @@ class DatabaseHelper {
   static final columnMessage = 'message';
   static final columnFeedback = 'feedback';
   static final columnTime= 'time';
+  static final columnIsCurrent= 'is_current';
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -48,6 +49,7 @@ class DatabaseHelper {
             $columnMessage TEXT NOT NULL,
             $columnTime TEXT, 
             $columnFeedback TEXT
+            $columnIsCurrent INTEGER
           )
           ''');
   /*  await db.execute('''
@@ -77,6 +79,12 @@ class DatabaseHelper {
   Future<int> insert(Map<String, dynamic> row) async {
     Database db = await instance.database;
     return await db.insert(table, row);
+  }
+
+  //this function helps to make unique query's with our owned query strings
+  Future<List<Map<String, dynamic>>> queryRows(List<dynamic> query) async {
+    Database db = await instance.database;
+    return await db.rawQuery(query[0], query[1]);
   }
 
   // All of the rows are returned as a list of maps, where each map is
