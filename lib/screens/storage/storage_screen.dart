@@ -49,6 +49,7 @@ class _StorageScreenState extends State<StorageScreen> {
         ),
         body: Consumer<SmsModel>(
           builder: (_, provider, __) => ListView(
+            reverse: true,
             children: provider.smsList
                 .map(
                   (sms) => SmsBubble(sms: sms),
@@ -72,14 +73,14 @@ class _StorageScreenState extends State<StorageScreen> {
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new TextButton(
-              child: new Text("Töröl"),
+              child: new Text("Töröl", style: TextStyle(color: purple),),
               onPressed: () async {
                 smsProvider.deleteSmsDb();
                 Navigator.of(context).pop();
               },
             ),
             new TextButton(
-              child: new Text("Mégsem"),
+              child: new Text("Mégsem", style: TextStyle(color: purple),),
               onPressed: () async {
                 Navigator.of(context).pop();
               },

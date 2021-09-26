@@ -90,10 +90,19 @@ class _FavouritesScreenState extends State<HomeScreen> {
       _path = result;
     });
 
-    final file = new File(_path);
-    Stream<List<int>> inputStream = file.openRead();
-    FileReadingService fileService = new FileReadingService();
-    fileService.read(_path, context);
+
+      if(_path==''|| _path=='-'|| _path==null){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+              "Sikertelen beolvasás.",
+            )));
+      }else{
+        final file = new File(_path);
+        Stream<List<int>> inputStream = file.openRead();
+        FileReadingService fileService = new FileReadingService();
+        fileService.read(_path, context);
+      }
+
   }
 
   Future<void> askStoragePermission() async {

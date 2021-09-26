@@ -3,8 +3,6 @@ import 'package:depo_sms/screens/loading/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'colors.dart';
-
 void main() {
   runApp(MyApp());
 }
@@ -16,7 +14,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: purple,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -32,16 +29,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<SmsModel>(create: (_) => SmsModel()),
-          //ChangeNotifierProvider<VehiclesModel>(create: (_) => VehiclesModel()),
-          //Provider<AnotherThing>(create: (_) => AnotherThing()),
-        ],
-        child: MaterialApp(
-          /*
+      providers: [
+        ChangeNotifierProvider<SmsModel>(create: (_) => SmsModel()),
+        //ChangeNotifierProvider<VehiclesModel>(create: (_) => VehiclesModel()),
+        //Provider<AnotherThing>(create: (_) => AnotherThing()),
+      ],
+      child:MaterialApp(/*
         theme: ThemeData(
 //roboto
           fontFamily: 'OpenSans',
@@ -57,7 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
             bodyText1: TextStyle(fontSize: 14.0,color: darkGrey,),
             bodyText2: TextStyle(fontSize: 12.0,color: black,),),
         ),*/
-          home: LoadingScreen(), /* ),*/
-        ));
+        home: LoadingScreen(),
+     /* ),*/));
   }
+
 }

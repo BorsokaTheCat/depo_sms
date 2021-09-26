@@ -23,7 +23,7 @@ MaterialColor colorCustom = MaterialColor(0xff3f1272, color);
 
 
 
-const lightPurple = Color(0xffFDF7FF);
+const lightPurple = Color(0x83f1272);
 const darkPurple = Color(0xff9F88B1);
 const purple = Color(0xff3f1272);
 const grey = Color(0xff4C4452);
