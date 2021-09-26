@@ -192,8 +192,9 @@ Future<void> _test() async {
     List<SimCard> cardList = await provider.getSimCards();
     SimCard card = cardList.first;
     SimCard card2 = cardList.last;
-    print(card.toString()+"card");
-    print(card.toString()+"card2");
+    cardList.forEach(print);
+    print(card.toString()+" card");
+    print(card.toString()+" card2");
     SmsSender sender = new SmsSender();
     SmsMessage message = new SmsMessage("06203602610", "message");
     sender.sendSms(message, simCard: card);
