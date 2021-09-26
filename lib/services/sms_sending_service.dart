@@ -17,13 +17,6 @@ class SmsSendingService{
 
     smsProvider.currentSmsCounter = smsProvider.currentSmsList.length;
     print("currentSmsCounter: "+smsProvider.currentSmsCounter.toString());
-    /*Timer(Duration(seconds: smsProvider.sendingDelay), () async {
-      if (smsProvider.currentSmsCounter < smsProvider.currentSmsList.length) {
-        await _smsSendImitation(smsProvider.currentSmsCounter,context);//?
-        smsProvider.currentSmsCounter += 1;
-        startSendingWithDelay(context);
-      }
-    });*/
 
     Timer.periodic(Duration(seconds: smsProvider.sendingDelay), (Timer timer) async {
       print("belül: "+smsProvider.currentSmsCounter.toString());
@@ -34,26 +27,16 @@ class SmsSendingService{
       }else{
         print("send sms: ");
         smsProvider.currentSmsCounter--;
-        await _smsSendImitation(smsProvider.currentSmsCounter,context);//?
+        await _smsSend(smsProvider.currentSmsCounter,context);//?
       }
-      //tmp--;
-      //if(i>0) _timer(tmp);
     });
 
-   /* if (smsProvider.currentSmsCounter == smsProvider.currentSmsList.length) {
-      int lngth=smsProvider.currentSmsList.length;
-      int currentSmsCounter =smsProvider.currentSmsCounter;
-      print('3/2 elvileg $currentSmsCounter == $lngth akkor sendinginprocess false és currentek =0 végeztünk a küldéssel');
-      smsProvider.sendingInProgress=false;
-      smsProvider.currentSmsCounter = 0;
-      //smsProvider.clearTheListFromCurrent();
-    }*/
   }
 
   Future<void> _smsSendImitation(int i,BuildContext context) async {
     var smsProvider = context.read<SmsModel>();
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
+    String formattedDate = DateFormat('yyyy.MM.dd  kk:mm').format(now);
 
     smsProvider.currentSmsList[i].time=formattedDate;
 
@@ -72,7 +55,7 @@ class SmsSendingService{
   Future<void> _smsSend(int i,BuildContext context) async {
     var smsProvider = context.read<SmsModel>();
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
+    String formattedDate = DateFormat('yyyy.MM.dd  kk:mm').format(now);
 
     smsProvider.currentSmsList[i].time=formattedDate;
 

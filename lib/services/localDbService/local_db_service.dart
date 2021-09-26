@@ -94,6 +94,7 @@ class DatabaseHelper {
     return await db.query(table);
   }
 
+
   // All of the methods (insert, query, update, delete) can also be done using
   // raw SQL commands. This method uses a raw query to give the row count.
   Future<int> queryRowCount() async {

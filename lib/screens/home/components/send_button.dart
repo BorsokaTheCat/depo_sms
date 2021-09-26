@@ -4,6 +4,7 @@ import 'package:depo_sms/services/permission_service.dart';
 import 'package:depo_sms/services/sms_sending_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:telephony/telephony.dart';
 
@@ -65,6 +66,9 @@ Future<void> _canWeSendSmses(BuildContext context) async {
   SimState simState = await telephony.simState;
   print('simState: $simState');
 
+  String permissionStatus = await permissionsService.checkSmsPermission();
+  bool permissionsGranted = await telephony.requestPhoneAndSmsPermissions;
+
 
   var smsProvider = context.read<SmsModel>();
   if (smsProvider.sendingInProgress  == true) {
@@ -85,13 +89,18 @@ Future<void> _canWeSendSmses(BuildContext context) async {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Ezzel a telefonnal nem tudunk sms-t küldeni.",)));
   }else if(simState != SimState.READY){
+    print("Nincs engedély.");
+    permissionsGranted = await telephony.requestPhoneAndSmsPermissions;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Nincs engedély",)));
+  }else if(permissionsGranted== false){
     print("Valami probléma akadt a sim kártyával.");
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Valami probléma akadt a sim kártyával.",)));
   }else{
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Elkezdődött a kiküldés!",)));
-    await permissionsService.requestPhoneStatePermission(); //todo test this
+    //permissionsGranted = await telephony.requestPhoneAndSmsPermissions;//todo test this
     smsProvider.setSendingInProgress(true);
     smsSendingService.startSendingWithDelay(context);
   }

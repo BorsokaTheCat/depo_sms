@@ -27,7 +27,7 @@ class FileReadingService{
 
       if(_isItARightNumber(line)){
         arr = line.split(";");
-        Sms currentSms = new Sms( number:arr[0], message:arr[1], feedback: "empty", time: null, current: 1);
+        Sms currentSms = new Sms( number:arr[0], message:arr[1], feedback: "Nem elküldött sms.", time: null, current: 1);
         await smsProvider.insertSms(currentSms);
         //_isInTheRightFormat=true;
 

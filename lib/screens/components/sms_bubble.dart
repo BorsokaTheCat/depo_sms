@@ -2,6 +2,8 @@ import 'package:depo_sms/model/bean/sms.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../colors.dart';
+
 class SmsBubble extends StatelessWidget {
   //ask for a vehicle
   final Sms sms;
@@ -14,26 +16,40 @@ class SmsBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    Size size = MediaQuery.of(context).size;
     //when we came from a form we need to go there back
     //when we not we just want to edit the vehicle
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        color: Colors.grey,
-        child: Column(
-          children: [
-            Divider(),
-            Text(sms.id.toString()),
-            Text(sms.number.toString()),
-            Text(sms.message.toString()),
-            Text(sms.feedback.toString()),
-            Text(sms.time.toString()),
-            Text(sms.current.toString()),
-            Divider(),
-          ],
+        width: size.width,
+        height: size.height*0.15,
+        color: sms.feedback=="Nem elküldött sms."?darkPurple:lightPurple,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _smsDetailRow("Telefonszám:  ", sms.number.toString()),
+              _smsDetailRow("Üzenet:             ", sms.message.toString()),
+              _smsDetailRow("Státusz:            ", sms.feedback.toString()),
+              _smsDetailRow("Időpont:            ", sms.time.toString()),
+            ],
+          ),
         )
       ),
     );
   }
+
+  Widget _smsDetailRow(String title, String detail){
+    return Row(
+      children: [
+        Text(title, style: TextStyle(fontWeight: FontWeight.bold),),
+        Expanded(child: Text(detail)),
+      ],
+    );
+  }
+
+
 
 }

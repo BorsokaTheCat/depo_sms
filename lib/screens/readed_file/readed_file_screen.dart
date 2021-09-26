@@ -1,7 +1,5 @@
 
 import 'package:depo_sms/model/sms_model.dart';
-import 'package:depo_sms/screens/components/delete_button.dart';
-import 'package:depo_sms/screens/components/refresh_button.dart';
 import 'package:depo_sms/screens/components/sms_bubble.dart';
 import 'package:depo_sms/screens/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,18 +39,6 @@ class _ReadedFileScreenState extends State<ReadedFileScreen> {
                 );
               },
             ),
-          actions: [
-
-            RefreshButton(
-              iconColor: Color(0xff3f1272),
-              onPressed: () async {
-                //await fillResultListFromDB();
-                setState(() {
-
-                });
-              },
-            ),
-          ],
         ),//todo list from provider
         body:Consumer<SmsModel>(
           builder: (_, provider, __) => ListView(

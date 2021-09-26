@@ -1,7 +1,6 @@
 
 import 'package:depo_sms/model/sms_model.dart';
 import 'package:depo_sms/screens/components/delete_button.dart';
-import 'package:depo_sms/screens/components/refresh_button.dart';
 import 'package:depo_sms/screens/components/sms_bubble.dart';
 import 'package:depo_sms/screens/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,7 +14,6 @@ class StorageScreen extends StatefulWidget {
   @override
   _StorageScreenState createState() => _StorageScreenState();
 }
-
 
 class _StorageScreenState extends State<StorageScreen> {
   @override
@@ -49,22 +47,13 @@ class _StorageScreenState extends State<StorageScreen> {
 
               },
             ),
-            RefreshButton(
-              iconColor: Color(0xff3f1272),
-              onPressed: () async {
-                //await fillResultListFromDB();
-                setState(() {
-
-                });
-              },
-            ),
           ],
-        ),//todo list from provider
+        ),
         body:Consumer<SmsModel>(
           builder: (_, provider, __) => ListView(
             children: provider.smsList
                 .map(
-                  (sms) => SmsBubble(sms: sms), //todo smsbuble
+                  (sms) => SmsBubble(sms: sms),
             )
                 .toList(),
           ),
@@ -77,6 +66,7 @@ class _StorageScreenState extends State<StorageScreen> {
 
   void _showDialog() {
     // flutter defined function
+    var smsProvider = context.read<SmsModel>();
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -88,9 +78,7 @@ class _StorageScreenState extends State<StorageScreen> {
             new TextButton(
               child: new Text("Töröl"),
               onPressed: () async {
-                //await _deleteDB();
-                setState(() {
-                });
+                 smsProvider.deleteSmsDb();
                 Navigator.of(context).pop();
               },
             ),
@@ -106,22 +94,6 @@ class _StorageScreenState extends State<StorageScreen> {
     );
   }
 
-/*
-  Future<void> _deleteDB() async {
-    await globals.dbHelper.deleteDB();
-    smsResults.clear();
-  }
 
-  Future<void> fillResultListFromDB() async{
-    smsResults.clear();
-    final allRows = await globals.dbHelper.queryAllRows();
-    for(int i=0;i<allRows.length;i++){
-      smsResults.add(
-          allRows[i]['number'] + "-részére: " + allRows[i]['feedback'] +"\n\n" + allRows[i]['time'] + " \n\n");
-    }
-  }
-
-
-*/
 }
 

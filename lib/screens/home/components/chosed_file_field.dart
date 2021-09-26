@@ -33,7 +33,7 @@ class ChosedFileField extends StatelessWidget {
             color: Colors.white,
             border: Border(
               bottom: BorderSide(
-                color: lightPurple,
+                color: purple,
                 width: 2.0,
               ),
             )),

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../../colors.dart';
+
 TextEditingController controller = TextEditingController();
 class SecondsField extends StatelessWidget {
 
@@ -18,7 +20,7 @@ class SecondsField extends StatelessWidget {
             color: Colors.white,
             border: Border(
               bottom: BorderSide(
-                color: Color(0xff595669),
+                color: purple,
                 width: 2.0,
               ),
             )),

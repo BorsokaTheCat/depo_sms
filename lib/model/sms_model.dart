@@ -7,14 +7,14 @@ class SmsModel with ChangeNotifier {
   List<Sms> smsList = [];
   List<Sms> currentSmsList = [];
 
-  bool sendingInProgress=false;
-  int sendingDelay=0;
-  int currentSmsCounter=0;
+  bool sendingInProgress = false;
+  int sendingDelay = 0;
+  int currentSmsCounter = 0;
 
   SmsHelper _smsHelper = new SmsHelper();
 
-  void setSendingInProgress(bool bool){
-    sendingInProgress=bool;
+  void setSendingInProgress(bool bool) {
+    sendingInProgress = bool;
     print('sendingInProgress changed to: $bool');
     notifyListeners();
   }
@@ -22,8 +22,8 @@ class SmsModel with ChangeNotifier {
   Future<int> updateSmsList() async {
     smsList.clear();
     currentSmsList.clear();
-    smsList= await _smsHelper.makeSmsList();
-    currentSmsList= await _smsHelper.makeCurrentSmsList();
+    smsList = await _smsHelper.makeSmsList();
+    currentSmsList = await _smsHelper.makeCurrentSmsList();
     notifyListeners();
     return smsList.length;
   }
@@ -43,21 +43,27 @@ class SmsModel with ChangeNotifier {
     await updateSmsList();
   }
 
+  void deleteSmsDb() {
+    _smsHelper.deleteSmsTable();
+    smsList.clear();
+    currentSmsList.clear();
+    notifyListeners();
+  }
+
   void printSms() {
     print("print BlugoServices from db:");
     _smsHelper.querySms();
   }
+
   void printCurrentSms() {
     print("print BlugoServices from db:");
     _smsHelper.queryCurrentSms();
   }
 
-  Future<void> clearTheListFromCurrent() async{
-
-for (int i=0;i<smsList.length;i++){
-
-  smsList[i].current=0;
-  await updateSms(smsList[i]);
-}
+  Future<void> clearTheListFromCurrent() async {
+    for (int i = 0; i < smsList.length; i++) {
+      smsList[i].current = 0;
+      await updateSms(smsList[i]);
+    }
   }
 }

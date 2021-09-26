@@ -179,11 +179,6 @@ class _FavouritesScreenState extends State<HomeScreen> {
                       ],
                     )),
               ),
-              RoundedButton(
-                text: "Teszt",
-                press: () async {
-                },
-              ),
               Consumer<SmsModel>(
                 builder: (_, provider, __) =>
                     Center(child: Text(smsProvider.sendingInProgress ?"Sending in progress":"Kész a kiküldés")),

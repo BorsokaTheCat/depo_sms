@@ -1,4 +1,3 @@
-
 import 'package:depo_sms/model/bean/sms.dart';
 
 import '../db_query_helper.dart';
@@ -31,30 +30,33 @@ class SmsHelper {
       DatabaseHelper.columnTime: sms.time,
       DatabaseHelper.columnCurrent: sms.current,
     };
-    await dbHelper.update(row,);
+    await dbHelper.update(
+      row,
+    );
   }
 
   void deleteSms(Sms sms) async {
     int id = sms.id;
     print(id);
-    await dbHelper.delete(
-        id);
+    await dbHelper.delete(id);
+  }
+
+  void deleteSmsTable() async {
+    await dbHelper.deleteDB();
   }
 
   void querySms() async {
-    var allSuppliers =
-    await dbHelper.queryAllRows();
+    var allSuppliers = await dbHelper.queryAllRows();
     allSuppliers.forEach(print);
   }
+
   void queryCurrentSms() async {
-    var allSuppliers =
-    await dbHelper.queryRows();
+    var allSuppliers = await dbHelper.queryRows();
     allSuppliers.forEach(print);
   }
 
   Future<List<Sms>> makeSmsList() async {
-    var allSuppliers =
-    await dbHelper.queryAllRows();
+    var allSuppliers = await dbHelper.queryAllRows();
     return makeListFromMap(allSuppliers);
   }
 
@@ -63,20 +65,19 @@ class SmsHelper {
 
     for (int i = 0; i < map.length; i++) {
       supplierList.add(new Sms(
-        id: map[i]['id'],
-        number: map[i]['number'],
-        message: map[i]['message'],
-        feedback: map[i]['feedback'],
-        time: map[i]['time'],
-          current: map[i]['current']
-      ));
+          id: map[i]['id'],
+          number: map[i]['number'],
+          message: map[i]['message'],
+          feedback: map[i]['feedback'],
+          time: map[i]['time'],
+          current: map[i]['current']));
     }
     return supplierList;
   }
 
   Future<List<Sms>> makeCurrentSmsList() async {
-    var allFavourite = await dbHelper
-        .queryRows(/*queryHelper.createCurrentSmsesQueryString()*/);
+    var allFavourite = await dbHelper.queryRows(
+        /*queryHelper.createCurrentSmsesQueryString()*/);
 
     return makeListFromMap(allFavourite);
   }

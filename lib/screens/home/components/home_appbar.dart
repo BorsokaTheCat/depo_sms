@@ -35,7 +35,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
               leading: IconButton(
                 icon: Icon(
                   Icons.save,
-                  color: lightPurple,
+                  color: purple,
                 ),
                 onPressed: savePressed,
               ),
@@ -43,7 +43,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                 IconButton(
                   icon: Icon(
                     Icons.open_in_new,
-                    color: lightPurple,
+                    color: purple,
                   ),
                   onPressed: openPressed,
                 )
