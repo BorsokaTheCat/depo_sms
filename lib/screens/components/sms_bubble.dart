@@ -21,17 +21,18 @@ class SmsBubble extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         width: size.width,
-        height: size.height*0.15,
         color: sms.feedback=="Nem elküldött sms."?darkPurple:lightPurple,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              SizedBox(height: size.height*0.005,),
               _smsDetailRow("Telefonszám:  ", sms.number.toString()),
               _smsDetailRow("Üzenet:             ", sms.message.toString()),
               _smsDetailRow("Státusz:            ", sms.feedback.toString()),
               _smsDetailRow("Időpont:            ", sms.time.toString()),
+              SizedBox(height: size.height*0.005,),
             ],
           ),
         )
