@@ -1,4 +1,5 @@
 import 'package:depo_sms/model/sms_model.dart';
+import 'package:depo_sms/screens/components/rounded_button.dart';
 import 'package:depo_sms/screens/home/components/home_appbar.dart';
 import 'package:depo_sms/screens/storage/storage_screen.dart';
 import 'package:depo_sms/services/file_reading_service.dart';
@@ -11,7 +12,7 @@ import 'components/secound_textfiled.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_document_picker/flutter_document_picker.dart';
 import 'dart:async';
-import 'dart:io';
+import 'dart:io';import 'package:sms/sms.dart';
 
 import 'components/send_button.dart';
 
@@ -153,6 +154,12 @@ class _FavouritesScreenState extends State<HomeScreen> {
                 height: 20.0,
               ),
               SendButton(),
+              RoundedButton(
+                text: "teszt",
+                press: (){
+                  _test();
+                },
+              ),
               Consumer<SmsModel>(
                 builder: (_, provider, __) => Container(
                     width: size.width,
@@ -178,4 +185,18 @@ class _FavouritesScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+Future<void> _test() async {
+    SimCardsProvider provider = new SimCardsProvider();
+    List<SimCard> cardList = await provider.getSimCards();
+    SimCard card = cardList.first;
+    SimCard card2 = cardList.last;
+    print(card.toString()+"card");
+    print(card.toString()+"card2");
+    SmsSender sender = new SmsSender();
+    SmsMessage message = new SmsMessage("06203602610", "message");
+    sender.sendSms(message, simCard: card);
+
+
 }
