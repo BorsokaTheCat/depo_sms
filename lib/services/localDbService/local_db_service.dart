@@ -82,7 +82,7 @@ class DatabaseHelper {
   }
 
   //this function helps to make unique query's with our owned query strings
-  Future<List<Map<String, dynamic>>> queryRows() async {
+  Future<List<Map<String, dynamic>>> queryCurrentSmsRows() async {
     Database db = await instance.database;
     return await db.rawQuery('SELECT * FROM $table WHERE current>0');
   }

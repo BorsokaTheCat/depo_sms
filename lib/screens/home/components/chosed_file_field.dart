@@ -1,12 +1,9 @@
-
-
 import 'package:depo_sms/colors.dart';
 import 'package:depo_sms/screens/readed_file/readed_file_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class ChosedFileField extends StatelessWidget {
-  final String  title;
+  final String title;
 
   const ChosedFileField({
     Key key,
@@ -15,20 +12,18 @@ class ChosedFileField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
     return GestureDetector(
       onTap: () {
-        //var smsProvider = context.read<SmsModel>();
-
-        //todo filepage
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => ReadedFileScreen()),
         );
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0), //line and text
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0), // just text
+        margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+        //line and text
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+        // just text
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border(
@@ -49,7 +44,6 @@ class ChosedFileField extends StatelessWidget {
                   ],
                 ),
               ),
-
             ],
           ),
         ),

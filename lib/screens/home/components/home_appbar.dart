@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../colors.dart';
 
-
-bool _pickFileInProgress = false;
-
-//the default blue appbar with one back button
 class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;

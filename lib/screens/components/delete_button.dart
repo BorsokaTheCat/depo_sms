@@ -15,9 +15,9 @@ class DeleteButton extends StatelessWidget {
     return ButtonTheme(
       padding: EdgeInsets.all(0),
       minWidth: 30,
-      child: FlatButton(
+      child: IconButton(
         onPressed: onPressed,
-        child: Icon(
+        icon: Icon(
           Icons.delete,
           size: 30,
           color: iconColor,

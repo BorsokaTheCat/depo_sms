@@ -24,18 +24,6 @@ class PermissionsService {
     return false;
   }
 
-  Future<String> checkSmsPermission() async {
-    var status = await Permission.sms.status;
-    if (status.isGranted) {
-      return 'isGranted';
-      // Either the permission was already granted before or the user just granted it.
-    }else if(status.isDenied){
-      return 'isDenied';
-    }else if(status.isPermanentlyDenied){
-      return 'isPermanentlyDenied';
-    }
-    return '';
-  }
 
   /// Requests the users permission to the storage.
   Future<bool> requestStoragePermission() async {

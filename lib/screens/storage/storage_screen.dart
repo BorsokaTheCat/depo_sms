@@ -1,4 +1,3 @@
-
 import 'package:depo_sms/model/sms_model.dart';
 import 'package:depo_sms/screens/components/delete_button.dart';
 import 'package:depo_sms/screens/components/sms_bubble.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../colors.dart';
-
 
 class StorageScreen extends StatefulWidget {
   @override
@@ -27,10 +25,12 @@ class _StorageScreenState extends State<StorageScreen> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: Text("Eredmények", style: TextStyle(color: Color(0xff3f1272)),),
-          leading:
-          BackButton(
-            color: Color(0xff3f1272),
+          title: Text(
+            "Eredmények",
+            style: TextStyle(color: purple),
+          ),
+          leading: BackButton(
+            color: purple,
             onPressed: () {
               Navigator.push(
                 context,
@@ -40,28 +40,24 @@ class _StorageScreenState extends State<StorageScreen> {
           ),
           actions: [
             DeleteButton(
-              iconColor: Color(0xff3f1272),
-              onPressed: () async{
-                //_deleteDB();
+              iconColor: purple,
+              onPressed: () async {
                 _showDialog();
-
               },
             ),
           ],
         ),
-        body:Consumer<SmsModel>(
+        body: Consumer<SmsModel>(
           builder: (_, provider, __) => ListView(
             children: provider.smsList
                 .map(
                   (sms) => SmsBubble(sms: sms),
-            )
+                )
                 .toList(),
           ),
         ),
       ),
     );
-
-
   }
 
   void _showDialog() {
@@ -78,7 +74,7 @@ class _StorageScreenState extends State<StorageScreen> {
             new TextButton(
               child: new Text("Töröl"),
               onPressed: () async {
-                 smsProvider.deleteSmsDb();
+                smsProvider.deleteSmsDb();
                 Navigator.of(context).pop();
               },
             ),
@@ -93,7 +89,4 @@ class _StorageScreenState extends State<StorageScreen> {
       },
     );
   }
-
-
 }
-

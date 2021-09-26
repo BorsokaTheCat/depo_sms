@@ -1,11 +1,9 @@
 import 'package:depo_sms/model/bean/sms.dart';
 
-import '../db_query_helper.dart';
 import '../local_db_service.dart';
 
 class SmsHelper {
   final dbHelper = DatabaseHelper.instance;
-  final queryHelper = QueryHelper.instance;
 
   ///insert the received supplier to the local db
   Future<void> insertSms(Sms sms) async {
@@ -51,7 +49,7 @@ class SmsHelper {
   }
 
   void queryCurrentSms() async {
-    var allSuppliers = await dbHelper.queryRows();
+    var allSuppliers = await dbHelper.queryCurrentSmsRows();
     allSuppliers.forEach(print);
   }
 
@@ -76,7 +74,7 @@ class SmsHelper {
   }
 
   Future<List<Sms>> makeCurrentSmsList() async {
-    var allFavourite = await dbHelper.queryRows(
+    var allFavourite = await dbHelper.queryCurrentSmsRows(
         /*queryHelper.createCurrentSmsesQueryString()*/);
 
     return makeListFromMap(allFavourite);

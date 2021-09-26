@@ -17,8 +17,6 @@ class SmsBubble extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Size size = MediaQuery.of(context).size;
-    //when we came from a form we need to go there back
-    //when we not we just want to edit the vehicle
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(

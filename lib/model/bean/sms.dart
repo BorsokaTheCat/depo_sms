@@ -3,7 +3,7 @@ class Sms {
   String number;
   String message;
   String feedback = '';
-  String time='';
+  String time = '';
   int current;
 
   Sms({
@@ -39,4 +39,3 @@ class Sms {
     return map;
   }
 }
-

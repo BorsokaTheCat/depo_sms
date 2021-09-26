@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 import '../../../colors.dart';
 
 TextEditingController controller = TextEditingController();
-class SecondsField extends StatelessWidget {
 
+class SecondsField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var smsProvider = context.read<SmsModel>();
@@ -47,7 +47,7 @@ class SecondsField extends StatelessWidget {
                           disabledBorder: InputBorder.none,
                           contentPadding: EdgeInsets.zero,
                           hintText: "másodpercek"),
-                      onChanged: (string){
+                      onChanged: (string) {
                         smsProvider.sendingDelay = int.parse(string);
                       },
                     )

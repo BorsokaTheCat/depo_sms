@@ -22,20 +22,14 @@ class FileReadingService{
         .transform(utf8.decoder) // Decode bytes to UTF-8.
         .transform(new LineSplitter()) // Convert stream to individual lines.
         .listen((String line) async {
-      var arr = new List(5);
+      List arr =[];
 
 
       if(_isItARightNumber(line)){
         arr = line.split(";");
         Sms currentSms = new Sms( number:arr[0], message:arr[1], feedback: "Nem elküldött sms.", time: null, current: 1);
         await smsProvider.insertSms(currentSms);
-        //_isInTheRightFormat=true;
 
-        /*if(currentSmsCounter==0 && dbindex==0){
-        dbindex= await _insert(currentSms);
-        print("dbindex: "+ dbindex.toString());
-      }else{
-      }*/
       }else{
         print("nem jo a telefonszám formátum");
         //_isInTheRightFormat=false;
