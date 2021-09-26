@@ -3,6 +3,7 @@ import 'package:depo_sms/model/sms_model.dart';
 import 'package:depo_sms/screens/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import 'loading_screen.dart';
@@ -52,16 +53,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
   //before we build the main screen we need initialize some data
   Future<void> taskInTheFuture() async {
     var smsProvider = context.read<SmsModel>();
-    smsProvider.clearTheListFromCurrent();
     print("taskInTheFuture");
     await smsProvider.updateSmsList();
-    smsProvider.smsList.forEach((element) {
-      print(element.toString()+" smsList");
-    });
-
-    smsProvider.smsList.forEach((element) {
-      print(element.toString()+" currentSmsList");
-    });
+    smsProvider.clearTheListFromCurrent();
+    smsProvider.setSendingInProgress(false);
     await smsProvider.updateSmsList();
   }
 

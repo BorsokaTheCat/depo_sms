@@ -46,6 +46,11 @@ class SmsHelper {
     await dbHelper.queryAllRows();
     allSuppliers.forEach(print);
   }
+  void queryCurrentSms() async {
+    var allSuppliers =
+    await dbHelper.queryRows();
+    allSuppliers.forEach(print);
+  }
 
   Future<List<Sms>> makeSmsList() async {
     var allSuppliers =
@@ -71,7 +76,7 @@ class SmsHelper {
 
   Future<List<Sms>> makeCurrentSmsList() async {
     var allFavourite = await dbHelper
-        .queryRows(queryHelper.createCurrentSmsesQueryString());
+        .queryRows(/*queryHelper.createCurrentSmsesQueryString()*/);
 
     return makeListFromMap(allFavourite);
   }

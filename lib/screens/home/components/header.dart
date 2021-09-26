@@ -10,7 +10,7 @@ class Header extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        SizedBox(height: size.height * 0.04),
+        SizedBox(height: size.height * 0.02),
         Center(
           child: Image.asset(
             "images/depo.png",

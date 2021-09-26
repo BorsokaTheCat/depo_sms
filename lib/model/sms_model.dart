@@ -13,6 +13,12 @@ class SmsModel with ChangeNotifier {
 
   SmsHelper _smsHelper = new SmsHelper();
 
+  void setSendingInProgress(bool bool){
+    sendingInProgress=bool;
+    print('sendingInProgress changed to: $bool');
+    notifyListeners();
+  }
+
   Future<int> updateSmsList() async {
     smsList.clear();
     currentSmsList.clear();
@@ -41,14 +47,17 @@ class SmsModel with ChangeNotifier {
     print("print BlugoServices from db:");
     _smsHelper.querySms();
   }
+  void printCurrentSms() {
+    print("print BlugoServices from db:");
+    _smsHelper.queryCurrentSms();
+  }
 
   Future<void> clearTheListFromCurrent() async{
 
-    for(Sms sms in smsList){
-      sms.current=0;
-      print(sms.toString());
-      await updateSms(sms);
+for (int i=0;i<smsList.length;i++){
 
-    }
+  smsList[i].current=0;
+  await updateSms(smsList[i]);
+}
   }
 }

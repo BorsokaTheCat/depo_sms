@@ -15,7 +15,7 @@ class QueryHelper {
   List<dynamic> createCurrentSmsesQueryString() {
     var queryList = [];
 
-    String queryString = "select * from sms where current>0";
+    String queryString = "select * from sms where id>2";
     var queryDetails = [];
 
     queryList.addAll([queryString, queryDetails]);

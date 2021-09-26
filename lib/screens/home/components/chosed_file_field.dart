@@ -1,6 +1,7 @@
 
 
 import 'package:depo_sms/colors.dart';
+import 'package:depo_sms/screens/readed_file/readed_file_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -17,13 +18,13 @@ class ChosedFileField extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
     return GestureDetector(
       onTap: () {
-        //_showTheReadedNumbers();
+        //var smsProvider = context.read<SmsModel>();
 
         //todo filepage
-        /*Navigator.push(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => FilePage()),
-        );*/
+          MaterialPageRoute(builder: (context) => ReadedFileScreen()),
+        );
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0), //line and text

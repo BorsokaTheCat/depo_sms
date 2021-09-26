@@ -82,9 +82,9 @@ class DatabaseHelper {
   }
 
   //this function helps to make unique query's with our owned query strings
-  Future<List<Map<String, dynamic>>> queryRows(List<dynamic> query) async {
+  Future<List<Map<String, dynamic>>> queryRows() async {
     Database db = await instance.database;
-    return await db.rawQuery(query[0], query[1]);
+    return await db.rawQuery('SELECT * FROM $table WHERE current>0');
   }
 
   // All of the rows are returned as a list of maps, where each map is

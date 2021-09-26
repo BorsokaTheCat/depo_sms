@@ -30,17 +30,17 @@ class _StorageScreenState extends State<StorageScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: Text("Eredmények", style: TextStyle(color: Color(0xff3f1272)),),
-
+          leading:
+          BackButton(
+            color: Color(0xff3f1272),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomeScreen()),
+              );
+            },
+          ),
           actions: [
-            BackButton(
-              color: Color(0xff3f1272),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              },
-            ),
             DeleteButton(
               iconColor: Color(0xff3f1272),
               onPressed: () async{

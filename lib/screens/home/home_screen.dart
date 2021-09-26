@@ -7,7 +7,6 @@ import 'package:depo_sms/services/file_reading_service.dart';
 import 'package:depo_sms/services/permission_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../colors.dart';
 import 'components/chosed_file_field.dart';
 import 'components/header.dart';
@@ -18,8 +17,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'components/send_button.dart';
-
-
+int tmp;
+bool stop=true;
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
     Key key,
@@ -160,19 +159,35 @@ class _FavouritesScreenState extends State<HomeScreen> {
               Header(),
               ChosedFileField(
                 title: '$_path',
+
               ),
               SecondsField(
               ),
               SizedBox(
-                height: 50.0,
-              ),
-              RoundedButton(
-                text: "db",
-                color: smsProvider.sendingInProgress ? grey : purple,
-                press: null, //todo
+                height: 20.0,
               ),
               SendButton(),
-              Center(child: Text(smsProvider.sendingInProgress ?"Sending in progress":"KÉsz a kiküldés")),
+              Consumer<SmsModel>(
+                builder: (_, provider, __) =>
+                    Container(
+                      width: size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("hátralévő sms-ek száma: "),
+                        Text(provider.currentSmsCounter!=0?  provider.currentSmsCounter.toString() :" "),
+                      ],
+                    )),
+              ),
+              RoundedButton(
+                text: "Teszt",
+                press: () async {
+                },
+              ),
+              Consumer<SmsModel>(
+                builder: (_, provider, __) =>
+                    Center(child: Text(smsProvider.sendingInProgress ?"Sending in progress":"Kész a kiküldés")),
+              ),
             ],
           ),
         ),
@@ -180,3 +195,6 @@ class _FavouritesScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
+
