@@ -54,11 +54,14 @@ class _FavouritesScreenState extends State<HomeScreen> {
   bool _checkByMimeType = false;
   bool _isInTheRightFormat = false;
 
+
+
   _pickDocument() async {
     String result;
     //currentSmsCounter = 0;
-    //currentSmsList.clear();
-
+    //currentSmsList.clear()
+    var smsProvider = context.read<SmsModel>();
+    await smsProvider.clearTheListFromCurrent();
     try {
       setState(() {
         _path = '-';
@@ -122,7 +125,12 @@ class _FavouritesScreenState extends State<HomeScreen> {
     }
   }
 
+@override
+ void initState(){
+    // TODO: implement initState
+    super.initState();
 
+  }
 
 
   final secoundsController = TextEditingController(/*text: "5"*/);

@@ -13,24 +13,25 @@ class SmsSendingService{
 
   void startSendingWithDelay(BuildContext context) {
     var smsProvider = context.read<SmsModel>();
-    int currentSmsCounter=0;
+    print('3 startSendingWithDelay smscouner: '+smsProvider.currentSmsCounter.toString());
 
+    smsProvider.sendingInProgress=true;
     Timer(Duration(seconds: smsProvider.sendingDelay), () {
-      if (currentSmsCounter < smsProvider.currentSmsList.length) {
-        _smsSend(currentSmsCounter,context);//?
-        currentSmsCounter += 1;
+      if (smsProvider.currentSmsCounter < smsProvider.currentSmsList.length) {
+        _smsSend(smsProvider.currentSmsCounter,context);//?
+        smsProvider.currentSmsCounter += 1;
         startSendingWithDelay(context);
       }
     });
 
-    smsProvider.sendingInProgress=true;
-    if (currentSmsCounter == smsProvider.currentSmsList.length) {
+    if (smsProvider.currentSmsCounter == smsProvider.currentSmsList.length) {
       int lngth=smsProvider.currentSmsList.length;
-      print('elvileg $currentSmsCounter == $lngth akkor sendinginprocess false és currentek =0');
+      int currentSmsCounter =smsProvider.currentSmsCounter;
+      print('3/2 elvileg $currentSmsCounter == $lngth akkor sendinginprocess false és currentek =0 végeztünk a küldéssel');
       smsProvider.sendingInProgress=false;
-      smsProvider.currentSmsList.forEach((element) {
+      smsProvider.currentSmsList.forEach((element) async {
         element.current=0;
-        smsProvider.updateSms(element);
+        await smsProvider.updateSms(element);
       });
     }
   }
@@ -74,7 +75,10 @@ class SmsSendingService{
       }
     });
 
-    sender.sendSms(message);
+
+    await sender.sendSms(message);
+    print('4sms kiküldése után '+smsProvider.currentSmsList[i].toString());
+
     /*for(int i=0;i<currentSmsList.length;i++){
       _update(currentSmsList[i].id, currentSmsList[i].feedback);
     }*/

@@ -12,7 +12,8 @@ import 'package:provider/provider.dart';
 class FileReadingService{
 
   Future<void> read(String path, BuildContext context ) async {
-    var profileProvider = context.read<SmsModel>();
+    var smsProvider = context.read<SmsModel>();
+
 
     final file = new File(path);
     Stream<List<int>> inputStream = file.openRead();
@@ -27,7 +28,7 @@ class FileReadingService{
       if(_isItARightNumber(line)){
         arr = line.split(";");
         Sms currentSms = new Sms( number:arr[0], message:arr[1], feedback: "empty", time: null, current: 1);
-        await profileProvider.insertSms(currentSms);
+        await smsProvider.insertSms(currentSms);
         //_isInTheRightFormat=true;
 
         /*if(currentSmsCounter==0 && dbindex==0){

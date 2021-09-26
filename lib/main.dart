@@ -1,5 +1,6 @@
 import 'package:depo_sms/model/sms_model.dart';
 import 'package:depo_sms/screens/home/home_screen.dart';
+import 'package:depo_sms/screens/loading/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
             bodyText1: TextStyle(fontSize: 14.0,color: darkGrey,),
             bodyText2: TextStyle(fontSize: 12.0,color: black,),),
         ),*/
-        home: HomeScreen(),
+        home: LoadingScreen(),
      /* ),*/));
   }
 

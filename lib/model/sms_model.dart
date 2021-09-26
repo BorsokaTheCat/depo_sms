@@ -9,6 +9,7 @@ class SmsModel with ChangeNotifier {
 
   bool sendingInProgress=false;
   int sendingDelay=0;
+  int currentSmsCounter=0;
 
   SmsHelper _smsHelper = new SmsHelper();
 
@@ -39,5 +40,15 @@ class SmsModel with ChangeNotifier {
   void printSms() {
     print("print BlugoServices from db:");
     _smsHelper.querySms();
+  }
+
+  Future<void> clearTheListFromCurrent() async{
+
+    for(Sms sms in smsList){
+      sms.current=0;
+      print(sms.toString());
+      await updateSms(sms);
+
+    }
   }
 }

@@ -17,7 +17,7 @@ class Sms {
 
   @override
   String toString() {
-    return 'Sms{id: $id, number: $number, message: $message, feedback: $feedback, time: $time, isCurrent: $current}';
+    return 'Sms{id: $id, number: $number, message: $message, feedback: $feedback, time: $time, current: $current}';
   }
 
   Sms.fromMap(Map<String, dynamic> res)
