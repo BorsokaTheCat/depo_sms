@@ -154,12 +154,6 @@ class _FavouritesScreenState extends State<HomeScreen> {
                 height: 20.0,
               ),
               SendButton(),
-              RoundedButton(
-                text: "teszt",
-                press: (){
-                  _test();
-                },
-              ),
               Consumer<SmsModel>(
                 builder: (_, provider, __) => Container(
                     width: size.width,

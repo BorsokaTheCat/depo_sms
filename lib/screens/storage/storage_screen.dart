@@ -49,8 +49,8 @@ class _StorageScreenState extends State<StorageScreen> {
         ),
         body: Consumer<SmsModel>(
           builder: (_, provider, __) => ListView(
-            reverse: true,
-            children: provider.smsList
+
+            children: provider.smsList.reversed
                 .map(
                   (sms) => SmsBubble(sms: sms),
                 )
